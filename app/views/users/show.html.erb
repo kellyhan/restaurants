@@ -2,89 +2,104 @@
   <%= @the_user.first_name %> <%= @the_user.last_name %>
 </h1>
 
-<hr>
-<% if @list_of_restaurants.count != 0 %>
+<div>
   <div>
-    <div>
-      <table border="2">
-        <tr>
-          <th>
-            ID
-          </th>
-
-          <th>
-            Name
-          </th>
-
-          <th>
-            Address
-          </th>
-
-          <th>
-            Comments
-          </th>
-
-          <th>
-            User
-          </th>
-
-          <th>
-            Created at
-          </th>
-
-          <th>
-            Updated at
-          </th>
-
-          <th>
-          </th>
-        </tr>
-
-        <% @list_of_restaurants.each do |a_restaurant| %>
-          <tr>
-            <td>
-              <%= a_restaurant.id %>
-            </td>
-
-            <td>
-              <%= a_restaurant.name %>
-            </td>
-
-            <td>
-              <%= a_restaurant.address %>
-            </td>
-
-            <td>
-              <%= a_restaurant.comments %>
-            </td>
-
-            <td>
-              <%= a_restaurant.restaurant_user.username %>
-            </td>
-
-            <td>
-              <%= time_ago_in_words(a_restaurant.created_at) %> ago
-            </td>
-            <td>
-              <%= time_ago_in_words(a_restaurant.updated_at) %> ago
-            </td>
-
-            <td>
-              <a href="/restaurants/<%= a_restaurant.id %>">
-                Show details
-              </a>
-            </td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
+    <a href="/users/<%= @the_user.id %>">
+      Go back
+    </a>
   </div>
-<% else %>
+
   <div>
-  <form action="/insert_restaurant">
-    <button>
-      Add a restaurant
-    </button>
-  </form>
+    <a href="/delete_user/<%= @the_user.id %>">
+      Delete user
+    </a>
+  </div>
 </div>
-<% end %>
+
+<div>
+  <dl>
+    <dt>
+      Name
+    </dt>
+    <dd>
+      <%= @the_user.first_name %> <%= @the_user.last_name %>
+    </dd>
+
+    <dt>
+      Username
+    </dt>
+    <dd>
+      <%= @the_user.username %>
+    </dd>
+
+    <dt>
+      User since
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_user.created_at) %> ago
+    </dd>
+
+    <dt>
+      Updated at
+    </dt>
+    <dd>
+      <%= time_ago_in_words(@the_user.updated_at) %> ago
+    </dd>
+  </dl>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Edit user
+    </h2>
+
+    <form action="/modify_user"  method="post" >
+      <div>
+        <label for="first_name_box">
+          First Name
+        </label>
+
+        <input type="text" id="first_name_box" name="query_first_name" value="<%= @the_user.first_name %>">
+      </div>
+
+      <div>
+        <label for="last_name_box">
+          Last Name
+        </label>
+
+        <input type="text" id="last_name_box" name="query_last_name" value="<%= @the_user.last_name %>">
+      </div>
+
+      <div>
+        <label for="username_box">
+          Username
+        </label>
+
+        <input type="text" id="username_box" name="query_username" value="<%= @the_user.username %>">
+      </div>
+
+      <div>
+        <label for="password_box">
+          New password
+        </label>
+
+        <input type="password" id="password_box" name="query_password">
+      </div>
+
+      <div>
+        <label for="password_confirm_box">
+          New password confirmation
+        </label>
+
+        <input type="password" id="password_confirm_box" name="query_password_confirmation">
+      </div>
+
+      <button>
+        Update user
+      </button>
+    </form>
+  </div>
+</div>

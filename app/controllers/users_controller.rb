@@ -10,11 +10,17 @@ class UsersController < ApplicationController
 
   def show
     @the_user = Users.where({ :id => params.fetch("path_id") }).at(0)
+
+    render({ :template => "users/show.html.erb" })
+  end
+  
+  def show_restaurants
+    @the_user = Users.where({ :id => params.fetch("path_id") }).at(0)
     the_id = params.fetch("path_id")
     matching_restaurants = Restaurant.all.where(:user_id => the_id)
     @list_of_restaurants = matching_restaurants.order({ :created_at => :desc })
 
-    render({ :template => "users/show.html.erb" })
+    render({ :template => "users/show_restaurants.html.erb" })
   end
 
   def sign_in_form
@@ -75,19 +81,19 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = @current_user
-    @user.email = params.fetch("query_email")
-    @user.password = params.fetch("query_password")
-    @user.password_confirmation = params.fetch("query_password_confirmation")
-    @user.first_name = params.fetch("query_first_name")
-    @user.last_name = params.fetch("query_last_name")
+    @the_user = @current_user
+    @the_user.password = params.fetch("query_password")
+    @the_user.password_confirmation = params.fetch("query_password_confirmation")
+    @the_user.first_name = params.fetch("query_first_name")
+    @the_user.last_name = params.fetch("query_last_name")
+    @the_user.username = params.fetch("query_username")
     
-    if @user.valid?
-      @user.save
+    if @the_user.valid?
+      @the_user.save
 
-      redirect_to("/", { :notice => "User account updated successfully."})
+      redirect_to("/users", { :notice => "User account updated successfully."})
     else
-      render({ :template => "users/edit_profile_with_errors.html.erb" , :alert => @user.errors.full_messages.to_sentence })
+      render({ :template => "users/edit_profile_with_errors.html.erb" , :alert => @the_user.errors.full_messages.to_sentence })
     end
   end
 

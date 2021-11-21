@@ -26,7 +26,8 @@ Rails.application.routes.draw do
   get("/users", { :controller => "users", :action => "index" })
 
   #READ
-  get("/users/:path_id", { :controller => "users", :action => "show" })
+  get("/users/:path_id", { :controller => "users", :action => "show_restaurants" })
+  get("/user_details/:path_id", { :controller => "users", :action => "show" })
 
   # SIGN UP FORM
   get("/user_sign_up", { :controller => "users", :action => "sign_up_form" })        
