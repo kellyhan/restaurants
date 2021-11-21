@@ -1,18 +1,12 @@
 class UsersController < ApplicationController
-  # Uncomment this if you want to force users to sign in before any other actions
   # skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie] })
-
-  before_action(:load_current_user)
-  def load_current_user
-    @current_user = Users.where({ :id => session.fetch(:user_id) }).at(0)
-  end
 
   def sign_in_form
     render({ :template => "users/sign_in.html.erb" })
   end
 
   def create_cookie
-    user = User.where({ :email => params.fetch("query_email") }).first
+    user = Users.where({ :email => params.fetch("query_email") }).first
     
     the_supplied_password = params.fetch("query_password")
     
@@ -34,7 +28,7 @@ class UsersController < ApplicationController
   def destroy_cookies
     reset_session
 
-    redirect_to("/", { :notice => "Signed out successfully." })
+    redirect_to("/user_sign_in", { :notice => "Signed out successfully." })
   end
 
   def sign_up_form
@@ -42,7 +36,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new
+    @user = Users.new
     @user.email = params.fetch("query_email")
     @user.password = params.fetch("query_password")
     @user.password_confirmation = params.fetch("query_password_confirmation")
@@ -85,7 +79,7 @@ class UsersController < ApplicationController
     @current_user.destroy
     reset_session
     
-    redirect_to("/", { :notice => "User account cancelled" })
+    redirect_to("/", { :notice => "User account deleted." })
   end
  
 end
