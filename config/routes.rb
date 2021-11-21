@@ -1,8 +1,28 @@
 Rails.application.routes.draw do
   
-  get("/", { :controller => "home", :action => "homepage" }) 
+  # Routes for the Restaurant resource:
+
+  # CREATE
+  post("/insert_restaurant", { :controller => "restaurants", :action => "create" })
+          
+  # READ
+  get("/restaurants", { :controller => "restaurants", :action => "index" })
+  
+  get("/restaurants/:path_id", { :controller => "restaurants", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_restaurant/:path_id", { :controller => "restaurants", :action => "update" })
+  
+  # DELETE
+  get("/delete_restaurant/:path_id", { :controller => "restaurants", :action => "destroy" })
+
+  #------------------------------
 
 # Routes for the User account:
+
+  #VIEW ALL USERS
+  get("/users", { :controller => "users", :action => "index" })
 
   # SIGN UP FORM
   get("/user_sign_up", { :controller => "users", :action => "sign_up_form" })        
@@ -28,5 +48,7 @@ Rails.application.routes.draw do
   get("/user_sign_out", { :controller => "users", :action => "destroy_cookies" })
              
   #------------------------------
+
+  get("/", { :controller => "home", :action => "homepage" }) 
 
 end
