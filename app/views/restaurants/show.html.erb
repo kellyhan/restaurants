@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      Restaurant #<%= @the_restaurant.id %> details
+      <%= @the_restaurant.name %>
     </h1>
 
     <div>
@@ -96,14 +96,6 @@
         </label>
 
         <textarea id="comments_box" name="query_comments"><%= @the_restaurant.comments %></textarea>
-      </div>
-
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_restaurant.user_id %>">
       </div>
 
       <button>

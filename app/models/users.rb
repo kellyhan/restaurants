@@ -14,4 +14,6 @@ class Users < ApplicationRecord
   validates :email, :uniqueness => { :case_sensitive => false }
   validates :email, :presence => true
   has_secure_password
+
+  has_many(:restaurants, { :class_name => "Restaurant", :foreign_key => "user_id", :dependent => :destroy })
 end

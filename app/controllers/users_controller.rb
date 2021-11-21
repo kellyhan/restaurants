@@ -8,6 +8,15 @@ class UsersController < ApplicationController
     render({ :template => "users/index.html.erb" })
   end
 
+  def show
+    @the_user = Users.where({ :id => params.fetch("path_id") }).at(0)
+    the_id = params.fetch("path_id")
+    matching_restaurants = Restaurant.all.where(:user_id => the_id)
+    @list_of_restaurants = matching_restaurants.order({ :created_at => :desc })
+
+    render({ :template => "users/show.html.erb" })
+  end
+
   def sign_in_form
     render({ :template => "users/sign_in.html.erb" })
   end

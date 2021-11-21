@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   # Routes for the Restaurant resource:
 
   # CREATE
-  post("/insert_restaurant", { :controller => "restaurants", :action => "create" })
-          
+  get("/insert_restaurant", { :controller => "restaurants", :action => "create_restaurant" })
+  post("/create_restaurant", { :controller => "restaurants", :action => "create" })        
+
   # READ
   get("/restaurants", { :controller => "restaurants", :action => "index" })
   
@@ -23,6 +24,9 @@ Rails.application.routes.draw do
 
   #VIEW ALL USERS
   get("/users", { :controller => "users", :action => "index" })
+
+  #READ
+  get("/users/:path_id", { :controller => "users", :action => "show" })
 
   # SIGN UP FORM
   get("/user_sign_up", { :controller => "users", :action => "sign_up_form" })        
