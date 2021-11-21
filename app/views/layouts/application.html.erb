@@ -13,6 +13,31 @@
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
 
+    <% if session.fetch(:user_id) != nil %>
+      <ul>
+        <li>
+          Current user: <%= @current_user.first_name %> <%= @current_user.last_name %>
+        </li>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/user_sign_out">Sign Out</a>
+        </li>
+      </ul>
+    <% else %>
+      <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/user_sign_up">Sign Up</a>
+        </li>
+        <li>
+          <a href="/user_sign_in">Sign In</a>
+        </li>
+      </ul>
+    <% end %>
   </head>
 
   <body>
