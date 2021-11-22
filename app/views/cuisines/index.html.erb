@@ -10,29 +10,6 @@
 
 <div>
   <div>
-    <h2>
-      Add a new cuisine
-    </h2>
-
-    <form action="/insert_cuisine" method="post">
-      <div>
-        <label for="name_box">
-          Name
-        </label>
-
-        <input type="text" id="name_box" name="query_name">
-      </div>
-
-      <button>
-        Create cuisine
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>
-<div>
-  <div>
     <table border="2">
       <tr>
         <th>
@@ -44,14 +21,15 @@
         </th>
 
         <th>
+          Number of restaurants
+        </th>
+
+        <th>
           Created at
         </th>
 
         <th>
           Updated at
-        </th>
-
-        <th>
         </th>
       </tr>
 
@@ -62,7 +40,14 @@
         </td>
 
         <td>
-          <%= a_cuisine.name %>
+          <a href="/cuisines/<%= a_cuisine.id %>">
+            <%= a_cuisine.name %>
+          </a>
+        </td>
+
+        <td>
+          <% matching_restaurants = Restaurant.all.where(:cuisine_id => a_cuisine.id) %>
+          <%= matching_restaurants.count %>
         </td>
 
         <td>
@@ -71,16 +56,8 @@
         <td>
           <%= time_ago_in_words(a_cuisine.updated_at) %> ago
         </td>
-
-        <td>
-          <a href="/cuisines/<%= a_cuisine.id %>">
-            Show details
-          </a>
-        </td>
       </tr>
       <% end %>
     </table>
   </div>
 </div>
-
-<hr>

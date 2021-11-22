@@ -28,6 +28,17 @@
       </dd>
 
       <dt>
+        Cuisine
+      </dt>
+      <% if @the_restaurant.cuisine != nil %>
+        <dd>
+          <%= @the_restaurant.cuisine.name %>
+        </dd>
+      <% else %>
+        <dd></dd>
+      <% end %>
+
+      <dt>
         Comments
       </dt>
       <dd>
@@ -94,7 +105,7 @@
           Cuisine
         </label>
 
-        <% if @the_restaurant.cuisine_id == nil %>
+        <% if @the_restaurant.cuisine == nil %>
           <input type="text" id="cuisine_box" name="query_cuisine">
         <% else %>
           <input type="text" id="cuisine_box" name="query_cuisine" value="<%= @the_restaurant.cuisine.name %>">

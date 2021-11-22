@@ -21,6 +21,10 @@
           </th>
 
           <th>
+            Cuisine
+          </th>
+
+          <th>
             Comments
           </th>
 
@@ -52,6 +56,16 @@
             <td>
               <%= a_restaurant.address %>
             </td>
+
+            <% if a_restaurant.cuisine != nil %>
+              <td>
+                <a href="/cuisines/<%= a_restaurant.cuisine.id %>">
+                  <%= a_restaurant.cuisine.name %>
+                </a>
+              </td>
+            <% else %>
+              <td></td>
+            <% end %>
 
             <td>
               <%= a_restaurant.comments %>

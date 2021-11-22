@@ -1,7 +1,6 @@
 class CuisinesController < ApplicationController
   def index
     matching_cuisines = Cuisine.all
-
     @list_of_cuisines = matching_cuisines.order({ :created_at => :desc })
 
     render({ :template => "cuisines/index.html.erb" })
@@ -9,10 +8,11 @@ class CuisinesController < ApplicationController
 
   def show
     the_id = params.fetch("path_id")
-
     matching_cuisines = Cuisine.where({ :id => the_id })
-
     @the_cuisine = matching_cuisines.at(0)
+
+    matching_restaurants = Restaurant.all.where(:cuisine_id => the_id)
+    @list_of_restaurants = matching_restaurants.order({ :created_at => :desc })
 
     render({ :template => "cuisines/show.html.erb" })
   end
