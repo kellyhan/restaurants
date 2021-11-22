@@ -90,6 +90,18 @@
       </div>
 
       <div>
+        <label for="cuisine_box">
+          Cuisine
+        </label>
+
+        <% if @the_restaurant.cuisine_id == nil %>
+          <input type="text" id="cuisine_box" name="query_cuisine">
+        <% else %>
+          <input type="text" id="cuisine_box" name="query_cuisine" value="<%= @the_restaurant.cuisine.name %>">
+        <% end %>
+      </div>
+
+      <div>
         <label for="comments_box">
           Comments
         </label>

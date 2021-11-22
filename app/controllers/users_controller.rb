@@ -64,6 +64,7 @@ class UsersController < ApplicationController
     @user.password_confirmation = params.fetch("query_password_confirmation")
     @user.first_name = params.fetch("query_first_name")
     @user.last_name = params.fetch("query_last_name")
+    @user.username = params.fetch("query_username")
 
     save_status = @user.save
 
