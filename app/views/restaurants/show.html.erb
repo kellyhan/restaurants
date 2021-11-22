@@ -7,13 +7,7 @@
     <div>
       <div>
         <a href="/restaurants">
-          Go back
-        </a>
-      </div>
-
-      <div>
-        <a href="/delete_restaurant/<%= @the_restaurant.id %>">
-          Delete restaurant
+          Go to all restaurants
         </a>
       </div>
     </div>
@@ -66,12 +60,17 @@
 
 <hr>
 
-
-<div>
+<% if @current_user == @the_restaurant.restaurant_user %>
   <div>
     <h2>
       Edit restaurant
     </h2>
+
+    <div>
+      <a href="/delete_restaurant/<%= @the_restaurant.id %>">
+        Delete restaurant
+      </a>
+    </div>
 
     <form action="/modify_restaurant/<%= @the_restaurant.id %>"  method="post" >
       <div>
@@ -103,6 +102,5 @@
       </button>
     </form>
   </div>
-</div>
-
-<hr>
+<% else %>
+<% end %>

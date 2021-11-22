@@ -4,14 +4,13 @@
 
 <div>
   <div>
-    <a href="/users/<%= @the_user.id %>">
-      Go back
+    <a href="/users">
+      Go to all users
     </a>
   </div>
-
   <div>
-    <a href="/delete_user/<%= @the_user.id %>">
-      Delete user
+    <a href="/users/<%= @the_user.id %>">
+      Go to user's restaurants
     </a>
   </div>
 </div>
@@ -50,11 +49,18 @@
 
 <hr>
 
-<div>
+<% if @current_user == @the_user %>
+
   <div>
     <h2>
       Edit user
     </h2>
+
+    <div>
+      <a href="/delete_user/<%= @the_user.id %>">
+        Delete user
+      </a>
+    </div>
 
     <form action="/modify_user"  method="post" >
       <div>
@@ -102,4 +108,5 @@
       </button>
     </form>
   </div>
-</div>
+<% else %>
+<% end %>

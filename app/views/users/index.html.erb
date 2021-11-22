@@ -47,7 +47,9 @@
       </td>
 
       <td>
-        <%= a_user.username %>
+        <a href="/user_details/<%= a_user.id %>">
+          <%= a_user.username %>
+        </a>
       </td>
 
       <td>
@@ -71,7 +73,7 @@
 
       <td>
         <a href="/users/<%= a_user.id %>">
-          Show details
+          Show <%= a_user.first_name %>'s restaurants
         </a>
       </td>
     </tr>

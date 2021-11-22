@@ -44,7 +44,7 @@ class RestaurantsController < ApplicationController
     the_restaurant.name = params.fetch("query_name")
     the_restaurant.address = params.fetch("query_address")
     the_restaurant.comments = params.fetch("query_comments")
-    the_restaurant.user_id = params.fetch("query_user_id")
+    the_restaurant.user_id = @current_user.id
 
     if the_restaurant.valid?
       the_restaurant.save
