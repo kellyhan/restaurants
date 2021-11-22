@@ -6,6 +6,7 @@
 #  address    :text
 #  comments   :text
 #  name       :string
+#  rating     :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  cuisine_id :integer

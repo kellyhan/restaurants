@@ -31,6 +31,19 @@
       </div>
 
       <div>
+        <label for="rating_box">
+          Rating
+        </label>
+
+        <select id="rating_box" name="query_rating">
+          <% array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] %>
+          <% array.each do |a_number| %>
+            <option value="<%= a_number %>"><%= a_number %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <div>
         <label for="comments_box">
           Comments
         </label>
