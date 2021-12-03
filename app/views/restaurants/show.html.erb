@@ -34,8 +34,6 @@
         <dd>
           <%= @the_restaurant.cuisine.name %>
         </dd>
-      <% else %>
-        <dd></dd>
       <% end %>
 
       <dt>
@@ -90,6 +88,12 @@
       </a>
     </div>
 
+    <div>
+      <a href="/insert_dish/">
+        Add dishes
+      </a>
+    </div>
+
     <form action="/modify_restaurant/<%= @the_restaurant.id %>"  method="post" >
       <div>
         <label for="name_box">
@@ -112,11 +116,16 @@
           Cuisine
         </label>
 
-        <% if @the_restaurant.cuisine == nil %>
-          <input type="text" id="cuisine_box" name="query_cuisine">
-        <% else %>
-          <input type="text" id="cuisine_box" name="query_cuisine" value="<%= @the_restaurant.cuisine.name %>">
-        <% end %>
+        <select id="cuisine_box" name="query_cuisine" value="<%= @the_restaurant.cuisine %>">
+          <% Cuisine.all.each do |a_cuisine| %>
+            <% if @the_restaurant.cuisine == a_cuisine %>
+              <option value="<%= a_cuisine.id %>" selected="true"><%= a_cuisine.name %></option>
+            <% else %>
+              <option value="<%= a_cuisine.id %>"><%= a_cuisine.name %></option>
+            <% end %>
+          <% end %>
+        </select>
+        (If the cuisine is not listed, <a href="/insert_cuisine">create a new cuisine</a>)
       </div>
 
       <div>
@@ -127,7 +136,11 @@
         <% array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] %>
         <select id="rating_box" name="query_rating" value="<%= @the_restaurant.rating %>">
           <% array.each do |a_number| %>
-            <option value="<%= a_number %>"><%= a_number %></option>
+            <% if @the_restaurant.rating == a_number %>
+              <option value="<%= a_number %>" selected="true"><%= a_number %></option>
+            <% else %>
+              <option value="<%= a_number %>"><%= a_number %></option>
+            <% end %>
           <% end %>
         </select>
       </div>

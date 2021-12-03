@@ -1,0 +1,30 @@
+<% if @current_user != nil %>  
+
+  <div>
+    <h2>
+      Add a new cuisine
+    </h2>
+
+    <form action="/create_cuisine" method="post">
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
+      <button>
+        Add cuisine
+      </button>
+    </form>
+  </div>
+
+<% else %>
+
+<div class="alert alert-warning alert-dismissable" role="alert">
+  Sign in to add a cuisine.
+</div>
+<a href="/user_sign_in">Sign In</a>
+
+<% end %>

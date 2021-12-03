@@ -1,0 +1,116 @@
+<div>
+  <div>
+    <h1>
+      Dish #<%= @the_dish.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/dishes">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_dish/<%= @the_dish.id %>">
+          Delete dish
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Name
+      </dt>
+      <dd>
+        <%= @the_dish.name %>
+      </dd>
+
+      <dt>
+        Image
+      </dt>
+      <dd>
+        <%= @the_dish.image %>
+      </dd>
+
+      <dt>
+        Restaurant
+      </dt>
+      <dd>
+        <%= @the_dish.restaurant_id %>
+      </dd>
+
+      <dt>
+        Comments
+      </dt>
+      <dd>
+        <%= @the_dish.comments %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_dish.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_dish.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit dish
+    </h2>
+
+    <form action="/modify_dish/<%= @the_dish.id %>"  method="post" >
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name" value="<%= @the_dish.name %>">
+      </div>
+
+      <div>
+        <label for="image_box">
+          Image
+        </label>
+
+        <input type="text" id="image_box" name="query_image" value="<%= @the_dish.image %>">
+      </div>
+
+      <div>
+        <label for="restaurant_id_box">
+          Restaurant
+        </label>
+
+        <input type="text" id="restaurant_id_box" name="query_restaurant_id" value="<%= @the_dish.restaurant_id %>">
+      </div>
+
+      <div>
+        <label for="comments_box">
+          Comments
+        </label>
+
+        <textarea id="comments_box" name="query_comments"><%= @the_dish.comments %></textarea>
+      </div>
+
+      <button>
+        Update dish
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

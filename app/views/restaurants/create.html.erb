@@ -27,7 +27,12 @@
           Cuisine
         </label>
 
-        <input type="text" id="cuisine_box" name="query_cuisine">
+        <select name="query_cuisine">
+          <% Cuisine.all.each do |a_cuisine| %>
+            <option value="<%= a_cuisine.id %>"><%= a_cuisine.name %></option>
+          <% end %>
+        </select>
+        (If the cuisine is not listed, <a href="/insert_cuisine">create a new cuisine</a>)
       </div>
 
       <div>

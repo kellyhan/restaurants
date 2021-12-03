@@ -17,15 +17,19 @@ class CuisinesController < ApplicationController
     render({ :template => "cuisines/show.html.erb" })
   end
 
+  def create_cuisine
+    render({ :template => "cuisines/create.html.erb" })
+  end
+
   def create
     the_cuisine = Cuisine.new
     the_cuisine.name = params.fetch("query_name")
 
     if the_cuisine.valid?
       the_cuisine.save
-      redirect_to("/cuisines", { :notice => "Cuisine created successfully." })
+      redirect_to("/insert_restaurant", { :notice => "Cuisine created successfully." })
     else
-      redirect_to("/cuisines", { :notice => "Cuisine failed to create successfully." })
+      redirect_to("/insert_cuisine", { :notice => "Cuisine failed to create successfully." })
     end
   end
 

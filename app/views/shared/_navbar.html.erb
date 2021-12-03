@@ -1,45 +1,39 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
   <div class="container">
-    <a class="navbar-brand" href="/">
-      Restaurants
-    </a>
+    <div class="row justify-content-left">
+      <div class="col-auto">
+        <a class="navbar-brand" href="/">
+          Restaurants
+        </a>
+      </div>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsible-nav-links" aria-controls="collapsible-nav-links" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="collapsible-nav-links">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Tables
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a href="/users" class="dropdown-item">
-              Users
-            </a>
-            <a href="/restaurants" class="dropdown-item">
-              Restaurants
-            </a>
-            <a href="/cuisines" class="dropdown-item">
-              Cuisines
-            </a>
-          </div>
-        </li>
-      </ul>
-    </div> <!-- .navbar-collapse -->
-
-    <div>
-    <% if @current_user != nil %>
-      <a href="/user_sign_out" class="dropdown-item">
-        Sign Out
-      </a>
-    <% else %>
-      <a href="/user_sign_in" class="dropdown-item">
-        Sign In
-      </a>
-    <% end %>
+      <div class="col-auto">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" href="/users">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/restaurants">Restaurants</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cuisines">Cuisines</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/dishes">Dishes</a>
+          </li>
+          <li class="nav-item">
+            <% if @current_user != nil %>
+              <a class="nav-link" href="/user_sign_out" class="dropdown-item">
+                Sign Out
+              </a>
+            <% else %>
+              <a class="nav-link" href="/user_sign_in" class="dropdown-item">
+                Sign In
+              </a>
+            <% end %>
+          </li>
+        </ul>
+      </div>
     </div>
-
   </div> <!-- .container -->
 </nav>

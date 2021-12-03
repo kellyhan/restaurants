@@ -26,27 +26,10 @@ class RestaurantsController < ApplicationController
     the_restaurant = Restaurant.new
     the_restaurant.name = params.fetch("query_name")
     the_restaurant.address = params.fetch("query_address")
+    the_restaurant.cuisine_id = params.fetch("query_cuisine")
     the_restaurant.comments = params.fetch("query_comments")
     the_restaurant.rating = params.fetch("query_rating")
     the_restaurant.user_id = @current_user.id
-
-    cuisine_name = params.fetch("query_cuisine")
-    the_cuisine = Cuisine.new
-    if Cuisine.all.count == 0
-      the_cuisine.name = cuisine_name
-      the_cuisine.save
-      the_restaurant.cuisine_id = the_cuisine.id
-    else
-      Cuisine.all.each do |a_cuisine|
-        if a_cuisine.name == cuisine_name
-          the_restaurant.cuisine_id = a_cuisine.id
-        else
-          the_cuisine.name = cuisine_name
-          the_cuisine.save
-          the_restaurant.cuisine_id = the_cuisine.id
-        end
-      end
-    end
     
 
     if the_restaurant.valid?
@@ -63,27 +46,11 @@ class RestaurantsController < ApplicationController
 
     the_restaurant.name = params.fetch("query_name")
     the_restaurant.address = params.fetch("query_address")
+    the_restaurant.cuisine_id = params.fetch("query_cuisine")
     the_restaurant.comments = params.fetch("query_comments")
     the_restaurant.rating = params.fetch("query_rating")
     the_restaurant.user_id = @current_user.id
 
-    cuisine_name = params.fetch("query_cuisine")
-    the_cuisine = Cuisine.new
-    if Cuisine.all.count == 0
-      the_cuisine.name = cuisine_name
-      the_cuisine.save
-      the_restaurant.cuisine_id = the_cuisine.id
-    else
-      Cuisine.all.each do |a_cuisine|
-        if a_cuisine.name == cuisine_name
-          the_restaurant.cuisine_id = a_cuisine.id
-        else
-          the_cuisine.name = cuisine_name
-          the_cuisine.save
-          the_restaurant.cuisine_id = the_cuisine.id
-        end
-      end
-    end
 
     if the_restaurant.valid?
       the_restaurant.save
