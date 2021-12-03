@@ -1,0 +1,58 @@
+<% if @current_user != nil %>  
+
+  <div>
+    <h2>
+      Add a new dish
+    </h2>
+
+    <form action="/create_dish" method="post">
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
+      <div>
+        <label for="image_box">
+          Image
+        </label>
+
+        <input type="text" id="image_box" name="query_image">
+      </div>
+
+      <div>
+        <label for="restaurant_id_box">
+          Restaurant
+        </label>
+
+        <select name="query_restaurant">
+          <% Restaurant.all.each do |a_restaurant| %>
+            <option value="<%= a_restaurant.id %>"><%= a_restaurant.name %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <div>
+        <label for="comments_box">
+          Comments
+        </label>
+
+        <textarea id="comments_box" name="query_comments" rows="3"></textarea>
+      </div>
+
+      <button>
+        Create dish
+      </button>
+    </form>
+  </div>
+
+<% else %>
+
+<div class="alert alert-warning alert-dismissable" role="alert">
+  Sign in to add a dish.
+</div>
+<a href="/user_sign_in">Sign In</a>
+
+<% end %>

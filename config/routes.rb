@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   # Routes for the Dish resource:
 
   # CREATE
-  post("/insert_dish", { :controller => "dishes", :action => "create" })
+  get("/insert_dish", { :controller => "dishes", :action => "create_dish" })
+  post("/create_dish", { :controller => "dishes", :action => "create" })     
           
   # READ
   get("/dishes", { :controller => "dishes", :action => "index" })

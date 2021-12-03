@@ -9,52 +9,15 @@
 <hr>
 
 <div>
-  <div>
-    <h2>
-      Add a new dish
-    </h2>
-
-    <form action="/insert_dish" method="post">
-      <div>
-        <label for="name_box">
-          Name
-        </label>
-
-        <input type="text" id="name_box" name="query_name">
-      </div>
-
-      <div>
-        <label for="image_box">
-          Image
-        </label>
-
-        <input type="text" id="image_box" name="query_image">
-      </div>
-
-      <div>
-        <label for="restaurant_id_box">
-          Restaurant
-        </label>
-
-        <input type="text" id="restaurant_id_box" name="query_restaurant_id">
-      </div>
-
-      <div>
-        <label for="comments_box">
-          Comments
-        </label>
-
-        <textarea id="comments_box" name="query_comments" rows="3"></textarea>
-      </div>
-
-      <button>
-        Create dish
-      </button>
-    </form>
-  </div>
+  <form action="/insert_dish">
+    <button>
+      Add a dish
+    </button>
+  </form>
 </div>
 
 <hr>
+
 <div>
   <div>
     <table border="2">

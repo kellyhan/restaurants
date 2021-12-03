@@ -17,6 +17,10 @@ class DishesController < ApplicationController
     render({ :template => "dishes/show.html.erb" })
   end
 
+  def create_dish
+    render({ :template => "dishes/create.html.erb" })
+  end
+
   def create
     the_dish = Dish.new
     the_dish.name = params.fetch("query_name")
