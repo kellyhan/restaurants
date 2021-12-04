@@ -1,73 +1,18 @@
-<div>
-  <div>
-    <h1>
-      List of all cuisines
-    </h1>
+<h1>
+  All cuisines
+</h1>
+
+<% @list_of_cuisines.each do |a_cuisine| %>
+<% matching_restaurants = Restaurant.all.where(:cuisine_id => a_cuisine.id) %>
+<% if matching_restaurants.count != 0 %>
+  <div class="list-group">
+    <a href="/users/<%= a_cuisine.id %>" class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1"><%= a_cuisine.name %></h5>
+        <small class="text-muted">Click to show all <%= a_cuisine.name %> restaurants</small>
+      </div>
+      <small class="text-muted"><%= matching_restaurants.count %> <%= a_cuisine.name %> restaurants</small>
+    </a>
   </div>
-</div>
-
-<hr>
-
-<div>
-  <form action="/insert_cuisine">
-    <button>
-      Add a cuisine
-    </button>
-  </form>
-</div>
-
-<hr>
-
-<div>
-  <div>
-    <table border="2">
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Name
-        </th>
-
-        <th>
-          Number of restaurants
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-      </tr>
-
-      <% @list_of_cuisines.each do |a_cuisine| %>
-      <tr>
-        <td>
-          <%= a_cuisine.id %>
-        </td>
-
-        <td>
-          <a href="/cuisines/<%= a_cuisine.id %>">
-            <%= a_cuisine.name %>
-          </a>
-        </td>
-
-        <td>
-          <% matching_restaurants = Restaurant.all.where(:cuisine_id => a_cuisine.id) %>
-          <%= matching_restaurants.count %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_cuisine.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_cuisine.updated_at) %> ago
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
+<% end %>
+<% end %>

@@ -20,6 +20,10 @@ class Restaurant < ApplicationRecord
   belongs_to(:user, { :required => true, :class_name => "Users", :foreign_key => "user_id" })
   belongs_to(:cuisine, { :required => true, :class_name => "Cuisine", :foreign_key => "cuisine_id" })
 
+  def user_restaurant_count
+    return Users.where({ :id => self.user_id }).count
+  end
+
   def restaurant_user
     return Users.where({ :id => self.user_id }).at(0)
   end

@@ -1,82 +1,19 @@
 <div>
     <h1>
-      List of all users
-    </h1>
-  </div>
-
-<hr>
-
-<div>
-  <table border="2">
-    <tr>
-      <th>
-        ID
-      </th>
-
-      <th>
-        Username
-      </th>
-
-      <th>
-        Email
-      </th>
-
-      <th>
-        First Name
-      </th>
-
-      <th>
-        Last Name
-      </th>
-
-      <th>
-        Created at
-      </th>
-
-      <th>
-        Updated at
-      </th>
-      <th>
-      </th>
-    </tr>
-
-    <% @list_of_users.each do |a_user| %>
-    <tr>
-      <td>
-        <%= a_user.id %>
-      </td>
-
-      <td>
-        <a href="/user_details/<%= a_user.id %>">
-          <%= a_user.username %>
-        </a>
-      </td>
-
-      <td>
-        <%= a_user.email %>
-      </td>
-
-      <td>
-        <%= a_user.first_name %>
-      </td>
-
-      <td>
-        <%= a_user.last_name %>
-      </td>
-
-      <td>
-        <%= time_ago_in_words(a_user.created_at) %> ago
-      </td>
-      <td>
-        <%= time_ago_in_words(a_user.updated_at) %> ago
-      </td>
-
-      <td>
-        <a href="/users/<%= a_user.id %>">
-          Show <%= a_user.first_name %>'s restaurants
-        </a>
-      </td>
-    </tr>
-    <% end %>
-  </table>
+      All users
+  </h1>
 </div>
+
+<% @list_of_users.each do |a_user| %>
+<div class="list-group">
+  <a href="/users/<%= a_user.id %>" class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= a_user.first_name %> <%= a_user.last_name %></h5>
+      <small class="text-muted">Click to show @<%= a_user.username %>'s restaurants</small>
+    </div>
+    <p class="mb-1">@<%= a_user.username %></p>
+    <% matching_restaurants = Restaurant.all.where(:user_id => a_user.id) %>
+    <small class="text-muted"><%= matching_restaurants.count %> restaurants</small>
+  </a>
+</div>
+<% end %>
