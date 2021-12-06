@@ -2,106 +2,47 @@
   <a href="/user_details/<%= @the_user.id %>"><%= @the_user.first_name %> <%= @the_user.last_name %></a>'s Restaurants
 </h1>
 
-<hr>
-<% if @list_of_restaurants.count != 0 %>
-  <div>
-    <div>
-      <table border="2">
-        <tr>
-          <th>
-            ID
-          </th>
-
-          <th>
-            Name
-          </th>
-
-          <th>
-            Address
-          </th>
-
-          <th>
-            Cuisine
-          </th>
-
-          <th>
-            Rating
-          </th>
-
-          <th>
-            Comments
-          </th>
-
-          <th>
-            User
-          </th>
-
-          <th>
-            Created at
-          </th>
-
-          <th>
-            Updated at
-          </th>
-        </tr>
-
-        <% @list_of_restaurants.each do |a_restaurant| %>
-          <tr>
-            <td>
-              <%= a_restaurant.id %>
-            </td>
-
-            <td>
-              <a href="/restaurants/<%= a_restaurant.id %>">
-                <%= a_restaurant.name %>
-              </a>
-            </td>
-
-            <td>
-              <%= a_restaurant.address %>
-            </td>
-
-            <% if a_restaurant.cuisine != nil %>
-              <td>
-                <a href="/cuisines/<%= a_restaurant.cuisine.id %>">
-                  <%= a_restaurant.cuisine.name %>
-                </a>
-              </td>
-            <% else %>
-              <td></td>
-            <% end %>
-
-            <td>
-              <%= a_restaurant.rating %>
-            </td>
-
-            <td>
-              <%= a_restaurant.comments %>
-            </td>
-
-            <td>
-              <a href="/user_details/<%= a_restaurant.restaurant_user.id %>">
-                <%= a_restaurant.restaurant_user.username %>
-              </a>
-            </td>
-
-            <td>
-              <%= time_ago_in_words(a_restaurant.created_at) %> ago
-            </td>
-            <td>
-              <%= time_ago_in_words(a_restaurant.updated_at) %> ago
-            </td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
-  </div>
-<% else %>
-  <div>
-  <form action="/insert_restaurant">
-    <button>
-      Add a restaurant
-    </button>
-  </form>
+<div>
+  <a href="/users">
+    Go to all users
+  </a>
 </div>
-<% end %>
+
+<div>
+  <% if @list_of_restaurants.count != 0 %>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <% @list_of_restaurants.each do |a_restaurant| %>
+        <div class="col">
+          <div class="card h-100" style="width: 18rem;">
+            <div class="card-header">
+              <h5 class="card-title"> <%= a_restaurant.name %> </h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"> <%= a_restaurant.address %> </li>
+                <li class="list-group-item"> <%= a_restaurant.rating %> </li>
+                <li class="list-group-item"> <%= a_restaurant.comments %> </li>
+                <% a_restaurant.list_of_ratings.each do |a_rating| %>
+                  <% if a_rating.user.id == @the_user.id %>
+                    <li class="list-group-item"> <%= a_restaurant.updated_at.strftime("%D %Z") %> </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+            <div class="card-footer">
+              <a href="/restaurants/<%= a_restaurant.id %>" class="card-link">Show details</a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>
+      <form action="/insert_restaurant">
+        <button>
+          Add a restaurant
+        </button>
+      </form>
+    </p>
+  <% end %>
+</div>

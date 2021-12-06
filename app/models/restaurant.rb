@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  address    :text
-#  comments   :text
+#  comments   :array
 #  name       :string
 #  rating     :integer
 #  created_at :datetime         not null
@@ -31,4 +31,27 @@ class Restaurant < ApplicationRecord
   def cuisine
     return Cuisine.where({ :id => self.cuisine_id }).at(0)
   end
+
+  def list_of_ratings
+    return Rating.where({ :restaurant_id => self.id })
+  end
+
+  def ave_ratings
+    matching_ratings = Rating.where({ :restaurant_id => self.id })
+
+    sum_array = Array.new
+    matching_ratings.all.each do |a_rating|
+      new_rate = a_rating.rate.to_f
+      sum_array << new_rate
+    end
+
+    if matching_ratings.count != 0
+      average_ratings = (sum_array.sum / matching_ratings.count).to_f
+    else
+      average_ratings = sum_array.sum
+    end
+    
+    return average_ratings
+  end
+
 end

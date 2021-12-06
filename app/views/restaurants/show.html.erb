@@ -1,162 +1,126 @@
-<div>
-  <div>
-    <h1>
-      <%= @the_restaurant.name %>
-    </h1>
-
+<div class="container">
+  <div class="row justify-content-lg-left">
     <div>
-      <div>
-        <a href="/restaurants">
-          Go to all restaurants
-        </a>
+      <a href="/restaurants">
+        Go to all restaurants
+      </a>
+    </div>
+  </div>
+
+  <div class="row justify-content-lg-left">
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-header">
+          <%= @the_restaurant.name %>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><%= @the_restaurant.address %></li>
+          <li class="list-group-item">
+            <% if @the_restaurant.cuisine != nil %>
+              <dd>
+                <%= @the_restaurant.cuisine.name %>
+              </dd>
+            <% end %>
+          </li>
+          <li class="list-group-item">Overall rating: <%= @the_restaurant.rating %></li>
+          <li class="list-group-item">
+            <ul>
+              <% @the_restaurant.list_of_ratings.each do |a_rating| %>
+                <li>
+                  <%= a_rating.user.username %>: <%= a_rating.rate %> (<%= a_rating.updated_at.strftime("%D %Z") %>)
+                </li>
+              <% end %>
+            </ul>
+          </li>
+          <li class="list-group-item"><%= @the_restaurant.comments %></li>
+        </ul>
       </div>
     </div>
 
-    <dl>
-      <dt>
-        Name
-      </dt>
-      <dd>
-        <%= @the_restaurant.name %>
-      </dd>
+    <div class="col-lg-4">
+      <% if @current_user != nil %>
+        <div>
+          <h2>
+            Edit restaurant
+          </h2>
 
-      <dt>
-        Address
-      </dt>
-      <dd>
-        <%= @the_restaurant.address %>
-      </dd>
+          <div>
+            <a href="/delete_restaurant/<%= @the_restaurant.id %>">
+              Delete restaurant
+            </a>
+          </div>
 
-      <dt>
-        Cuisine
-      </dt>
-      <% if @the_restaurant.cuisine != nil %>
-        <dd>
-          <%= @the_restaurant.cuisine.name %>
-        </dd>
+          <div>
+            <a href="/insert_dish/">
+              Add dishes
+            </a>
+          </div>
+
+          <form action="/modify_restaurant/<%= @the_restaurant.id %>"  method="post" >
+            <div>
+              <label for="name_box">
+                Name
+              </label>
+
+              <input type="text" id="name_box" name="query_name" value="<%= @the_restaurant.name %>">
+            </div>
+
+            <div>
+              <label for="address_box">
+                Address
+              </label>
+
+              <textarea id="address_box" name="query_address"><%= @the_restaurant.address %></textarea>
+            </div>
+
+            <div>
+              <label for="cuisine_box">
+                Cuisine
+              </label>
+
+              <select id="cuisine_box" name="query_cuisine" value="<%= @the_restaurant.cuisine %>">
+                <% Cuisine.all.each do |a_cuisine| %>
+                  <% if @the_restaurant.cuisine == a_cuisine %>
+                    <option value="<%= a_cuisine.id %>" selected="true"><%= a_cuisine.name %></option>
+                  <% else %>
+                    <option value="<%= a_cuisine.id %>"><%= a_cuisine.name %></option>
+                  <% end %>
+                <% end %>
+              </select>
+              (If the cuisine is not listed, <a href="/insert_cuisine">create a new cuisine</a>)
+            </div>
+
+            <div>
+              <label for="rating_box">
+                Rating
+              </label>
+
+              <% array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] %>
+              <select id="rating_box" name="query_rating" value="<%= @the_restaurant.rating %>">
+                <% array.each do |a_number| %>
+                  <% if @the_restaurant.rating == a_number %>
+                    <option value="<%= a_number %>" selected="true"><%= a_number %></option>
+                  <% else %>
+                    <option value="<%= a_number %>"><%= a_number %></option>
+                  <% end %>
+                <% end %>
+              </select>
+            </div>
+
+            <div>
+              <label for="comments_box">
+                Comments
+              </label>
+
+              <textarea id="comments_box" name="query_comments"><%= @the_restaurant.comments %></textarea>
+            </div>
+
+            <button>
+              Update restaurant
+            </button>
+          </form>
+        </div>
       <% end %>
-
-      <dt>
-        Rating
-      </dt>
-      <dd>
-        <%= @the_restaurant.rating %>
-      </dd>
-
-      <dt>
-        Comments
-      </dt>
-      <dd>
-        <%= @the_restaurant.comments %>
-      </dd>
-
-      <dt>
-        User
-      </dt>
-      <dd>
-        <%= @the_restaurant.restaurant_user.username %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_restaurant.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_restaurant.updated_at) %> ago
-      </dd>
-    </dl>
+    </div>
   </div>
 </div>
-
-<hr>
-
-<% if @current_user == @the_restaurant.restaurant_user %>
-  <div>
-    <h2>
-      Edit restaurant
-    </h2>
-
-    <div>
-      <a href="/delete_restaurant/<%= @the_restaurant.id %>">
-        Delete restaurant
-      </a>
-    </div>
-
-    <div>
-      <a href="/insert_dish/">
-        Add dishes
-      </a>
-    </div>
-
-    <form action="/modify_restaurant/<%= @the_restaurant.id %>"  method="post" >
-      <div>
-        <label for="name_box">
-          Name
-        </label>
-
-        <input type="text" id="name_box" name="query_name" value="<%= @the_restaurant.name %>">
-      </div>
-
-      <div>
-        <label for="address_box">
-          Address
-        </label>
-
-        <textarea id="address_box" name="query_address"><%= @the_restaurant.address %></textarea>
-      </div>
-
-      <div>
-        <label for="cuisine_box">
-          Cuisine
-        </label>
-
-        <select id="cuisine_box" name="query_cuisine" value="<%= @the_restaurant.cuisine %>">
-          <% Cuisine.all.each do |a_cuisine| %>
-            <% if @the_restaurant.cuisine == a_cuisine %>
-              <option value="<%= a_cuisine.id %>" selected="true"><%= a_cuisine.name %></option>
-            <% else %>
-              <option value="<%= a_cuisine.id %>"><%= a_cuisine.name %></option>
-            <% end %>
-          <% end %>
-        </select>
-        (If the cuisine is not listed, <a href="/insert_cuisine">create a new cuisine</a>)
-      </div>
-
-      <div>
-        <label for="rating_box">
-          Rating
-        </label>
-
-        <% array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] %>
-        <select id="rating_box" name="query_rating" value="<%= @the_restaurant.rating %>">
-          <% array.each do |a_number| %>
-            <% if @the_restaurant.rating == a_number %>
-              <option value="<%= a_number %>" selected="true"><%= a_number %></option>
-            <% else %>
-              <option value="<%= a_number %>"><%= a_number %></option>
-            <% end %>
-          <% end %>
-        </select>
-      </div>
-
-      <div>
-        <label for="comments_box">
-          Comments
-        </label>
-
-        <textarea id="comments_box" name="query_comments"><%= @the_restaurant.comments %></textarea>
-      </div>
-
-      <button>
-        Update restaurant
-      </button>
-    </form>
-  </div>
-<% else %>
-<% end %>

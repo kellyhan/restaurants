@@ -6,7 +6,7 @@
 <% matching_restaurants = Restaurant.all.where(:cuisine_id => a_cuisine.id) %>
 <% if matching_restaurants.count != 0 %>
   <div class="list-group">
-    <a href="/users/<%= a_cuisine.id %>" class="list-group-item list-group-item-action">
+    <a href="/cuisines/<%= a_cuisine.id %>" class="list-group-item list-group-item-action">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1"><%= a_cuisine.name %></h5>
         <small class="text-muted">Click to show all <%= a_cuisine.name %> restaurants</small>

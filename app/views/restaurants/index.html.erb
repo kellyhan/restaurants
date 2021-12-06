@@ -55,7 +55,7 @@ async defer></script>
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <% @list_of_restaurants.each do |a_restaurant| %>
         <div class="col">
-          <div class="card h-100">
+          <div class="card h-100" style="width: 18rem;">
             <div class="card-header">
               <h5 class="card-title"> <%= a_restaurant.name %> </h5>
             </div>
@@ -68,7 +68,7 @@ async defer></script>
               </ul>
             </div>
             <div class="card-footer">
-              <a href="/restaurants/a_restaurant.id" class="card-link">Show details</a>
+              <a href="/restaurants/<%= a_restaurant.id %>" class="card-link">Show details</a>
             </div>
           </div>
         </div>
