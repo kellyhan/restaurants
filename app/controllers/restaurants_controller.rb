@@ -6,6 +6,7 @@ class RestaurantsController < ApplicationController
 
     @list_of_restaurants.each do |a_restaurant|
       a_restaurant.rating = a_restaurant.ave_ratings
+      #a_restaurant.restaurant_comments = a_restaurant.restaurant_comments
     end
 
     render({ :template => "restaurants/index.html.erb" })
@@ -18,6 +19,7 @@ class RestaurantsController < ApplicationController
 
     @the_restaurant = matching_restaurants.at(0)
     @the_restaurant.rating = @the_restaurant.ave_ratings
+    #@the_restaurant.restaurant_comments = @the_restaurant.restaurant_comments
 
     render({ :template => "restaurants/show.html.erb" })
   end
@@ -32,10 +34,15 @@ class RestaurantsController < ApplicationController
     the_restaurant.name = params.fetch("query_name")
     the_restaurant.address = params.fetch("query_address")
     the_restaurant.cuisine_id = params.fetch("query_cuisine")
-    the_restaurant.comments << params.fetch("query_comments")
     the_restaurant.user_id = @current_user.id
     the_restaurant.rating = params.fetch("query_rating")
-    
+
+    #the_comment = Comment.new
+    #the_comment.text = params.fetch("query_comments")
+    #the_comment.user_id = @current_user.id
+    #the_comment.restaurant_id = the_restaurant.id
+    #the_comment.save
+    #the_restaurant.restaurant_comments = the_restaurant.restaurant_comments + " " + the_comment.text
 
     if the_restaurant.valid?
       the_restaurant.save
@@ -61,12 +68,12 @@ class RestaurantsController < ApplicationController
     the_rating.save
     the_restaurant.rating = the_restaurant.ave_ratings
 
-    the_comment = Comment.new
-    the_comment.text = params.fetch("query_comments")
-    the_comment.user_id = @current_user.id
-    the_comment.restaurant_id = the_restaurant.id
-    the_comment.save
-    the_restaurant.comments << the_comment.text
+    #the_comment = Comment.new
+    #the_comment.text = params.fetch("query_comments")
+    #the_comment.user_id = @current_user.id
+    #the_comment.restaurant_id = the_restaurant.id
+    #the_comment.save
+    #the_restaurant.restaurant_comments = the_restaurant.restaurant_comments + " " + the_comment.text
 
     if the_restaurant.valid?
       the_restaurant.save

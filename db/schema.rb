@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_06_100635) do
+ActiveRecord::Schema.define(version: 2021_12_07_051522) do
 
   create_table "comments", force: :cascade do |t|
-    t.text "text"
     t.integer "user_id"
     t.integer "restaurant_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "text"
   end
 
   create_table "cuisines", force: :cascade do |t|
@@ -43,8 +43,16 @@ ActiveRecord::Schema.define(version: 2021_12_06_100635) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-# Could not dump table "restaurants" because of following StandardError
-#   Unknown type 'array' for column 'comments'
+  create_table "restaurants", force: :cascade do |t|
+    t.string "name"
+    t.text "address"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "cuisine_id"
+    t.integer "rating"
+    t.text "restaurant_comments"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
