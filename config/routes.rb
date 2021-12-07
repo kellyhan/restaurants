@@ -132,6 +132,6 @@ Rails.application.routes.draw do
              
   #------------------------------
 
-  get("/", { :controller => "home", :action => "homepage" }) 
+  get("/", { :controller => "restaurants", :action => "index" })
 
 end

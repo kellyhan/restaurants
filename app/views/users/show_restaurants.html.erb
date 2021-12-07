@@ -21,7 +21,7 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item"> <%= a_restaurant.address %> </li>
                 <li class="list-group-item"> <%= a_restaurant.rating %> </li>
-                <li class="list-group-item"> <%= a_restaurant.comments %> </li>
+                <li class="list-group-item"> <%= a_restaurant.restaurant_comments %> </li>
                 <% a_restaurant.list_of_ratings.each do |a_rating| %>
                   <% if a_rating.user.id == @the_user.id %>
                     <li class="list-group-item"> <%= a_restaurant.updated_at.strftime("%D %Z") %> </li>
