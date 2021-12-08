@@ -22,23 +22,13 @@
             <div class="card-body">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item"> <%= a_restaurant.address %> </li>
-                <% if a_restaurant.list_of_ratings.count == 1 %>
-                  <li class="list-group-item"> User's rating:
-                    <% a_restaurant.list_of_ratings.each do |a_rating| %>
-                      <% if a_rating.user.id == @the_user.id %>
-                        <%= a_restaurant.rating %>
-                      <% end %>
+                <li class="list-group-item"> User's rating:
+                  <% a_restaurant.list_of_ratings.each do |a_rating| %>
+                    <% if a_rating.user.id == @the_user.id %>
+                      <%= a_restaurant.rating %>
                     <% end %>
-                  </li>
-                <% else %>
-                  <li class="list-group-item"> User's ratings:
-                    <% a_restaurant.list_of_ratings.each_with_index do |a_rating, an_index| %>
-                      <% if a_rating.user.id == @the_user.id %>
-                        <%= a_rating.rate %>. 
-                      <% end %>
-                    <% end %>
-                  </li>
-                <% end %>
+                  <% end %>
+                </li>
                 <li class="list-group-item"> Comments
                   <ul>
                     <% Comment.where({ :restaurant_id => a_restaurant.id }).each do |a_comment| %>

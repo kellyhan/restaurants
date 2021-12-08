@@ -29,13 +29,15 @@
                 <li class="list-group-item"> <%= a_restaurant.address %> </li>
                 <li class="list-group-item"> <%= a_restaurant.cuisine.name %> </li>
                 <li class="list-group-item"> Average rating: <%= a_restaurant.rating %> </li>
-                <li class="list-group-item"> Comments
-                  <ul>
-                    <% Comment.where({ :restaurant_id => a_restaurant.id }).each do |a_comment| %>
-                      <li class="list-group-item"> <%= a_comment.user.username %>: <%= a_comment.text %> </li>
-                    <% end %>
-                  </ul>
-                </li>
+                <% if Comment.where({ :restaurant_id => a_restaurant.id }).count != 0 %>
+                  <li class="list-group-item"> Comments
+                    <ul>
+                      <% Comment.where({ :restaurant_id => a_restaurant.id }).each do |a_comment| %>
+                        <li class="list-group-item"> <%= a_comment.user.username %>: <%= a_comment.text %> </li>
+                      <% end %>
+                    </ul>
+                  </li>
+                <% end %>
               </ul>
             </div>
             <div class="card-footer">

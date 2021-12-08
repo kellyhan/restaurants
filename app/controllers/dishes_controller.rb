@@ -27,6 +27,7 @@ class DishesController < ApplicationController
     @the_dish.image = params.fetch(:image)
     @the_dish.restaurant_id = params.fetch("query_restaurant")
     @the_dish.comments = params.fetch("query_comments")
+    @the_dish.user_id = @current_user.id
 
     if @the_dish.valid?
       @the_dish.save
@@ -44,6 +45,7 @@ class DishesController < ApplicationController
     @the_dish.image = params.fetch(:image)
     @the_dish.restaurant_id = params.fetch("query_restaurant")
     @the_dish.comments = params.fetch("query_comments")
+    @the_dish.user_id = @current_user.id
 
     if @the_dish.valid?
       @the_dish.save
