@@ -4,11 +4,6 @@ class RestaurantsController < ApplicationController
 
     @list_of_restaurants = matching_restaurants.order({ :created_at => :desc })
 
-    @list_of_restaurants.each do |a_restaurant|
-      a_restaurant.rating = a_restaurant.ave_ratings
-      #a_restaurant.restaurant_comments = a_restaurant.restaurant_comments
-    end
-
     render({ :template => "restaurants/index.html.erb" })
   end
 
@@ -18,7 +13,6 @@ class RestaurantsController < ApplicationController
     matching_restaurants = Restaurant.where({ :id => the_id })
 
     @the_restaurant = matching_restaurants.at(0)
-    @the_restaurant.rating = @the_restaurant.ave_ratings
 
     render({ :template => "restaurants/show.html.erb" })
   end
@@ -34,16 +28,25 @@ class RestaurantsController < ApplicationController
     the_restaurant.address = params.fetch("query_address")
     the_restaurant.cuisine_id = params.fetch("query_cuisine")
     the_restaurant.user_id = @current_user.id
-    the_restaurant.rating = params.fetch("query_rating")
 
-    the_comment = Comment.new
-    the_comment.text = params.fetch("query_comments")
-    the_comment.user_id = @current_user.id
-    the_comment.restaurant_id = the_restaurant.id
-    the_comment.save
+    the_rating = Rating.new
+    the_rating.rate = params.fetch("query_rating")
+    the_rating.user_id = @current_user.id
+    the_rating.save
+    the_restaurant.rating = the_restaurant.ave_ratings
+
+    if params.fetch("query_comments") != ""
+      the_comment = Comment.new
+      the_comment.text = params.fetch("query_comments")
+      the_comment.user_id = @current_user.id
+      the_comment.restaurant_id = the_restaurant.id
+      the_comment.save
+    end
 
     if the_restaurant.valid?
       the_restaurant.save
+      the_rating.restaurant_id = the_restaurant.id
+      the_rating.save
       redirect_to("/restaurants", { :notice => "Restaurant created successfully." })
     else
       redirect_to("/restaurants", { :alert => the_restaurant.errors.full_messages.to_sentence })
@@ -72,11 +75,13 @@ class RestaurantsController < ApplicationController
     end
     the_restaurant.rating = the_restaurant.ave_ratings
 
-    the_comment = Comment.new
-    the_comment.text = params.fetch("query_comments")
-    the_comment.user_id = @current_user.id
-    the_comment.restaurant_id = the_restaurant.id
-    the_comment.save
+    if params.fetch("query_comments") != ""
+      the_comment = Comment.new
+      the_comment.text = params.fetch("query_comments")
+      the_comment.user_id = @current_user.id
+      the_comment.restaurant_id = the_restaurant.id
+      the_comment.save
+    end
 
     if the_restaurant.valid?
       the_restaurant.save

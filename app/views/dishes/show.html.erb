@@ -8,16 +8,16 @@
 
 <div>
   <h2>
-    Edit dish
+    Edit image
   </h2>
 
   <div>
-    <a href="/delete_dish/<%= @the_dish.id %>">
-      Delete dish
+    <a href="/delete_picture/<%= @the_dish.id %>">
+      Delete image
     </a>
   </div>
 
-  <form action="/modify_dish/<%= @the_dish.id %>"  method="post" class="form-horizontal" enctype="multipart/form-data">
+  <form action="/modify_picture/<%= @the_dish.id %>"  method="post" class="form-horizontal" enctype="multipart/form-data">
     <div>
       <label for="name_box">
         Name
@@ -61,7 +61,7 @@
     </div>
 
     <button>
-      Update dish
+      Update image
     </button>
   </form>
 </div>
