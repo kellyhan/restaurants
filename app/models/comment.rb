@@ -15,4 +15,8 @@ class Comment < ApplicationRecord
     return Users.where({ :id => self.user_id }).at(0)
   end
 
+  def restaurant
+    return Users.where({ :id => self.restaurant_id }).at(0)
+  end
+
 end

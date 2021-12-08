@@ -19,7 +19,6 @@ class RestaurantsController < ApplicationController
 
     @the_restaurant = matching_restaurants.at(0)
     @the_restaurant.rating = @the_restaurant.ave_ratings
-    #@the_restaurant.restaurant_comments = @the_restaurant.restaurant_comments
 
     render({ :template => "restaurants/show.html.erb" })
   end
@@ -37,12 +36,11 @@ class RestaurantsController < ApplicationController
     the_restaurant.user_id = @current_user.id
     the_restaurant.rating = params.fetch("query_rating")
 
-    #the_comment = Comment.new
-    #the_comment.text = params.fetch("query_comments")
-    #the_comment.user_id = @current_user.id
-    #the_comment.restaurant_id = the_restaurant.id
-    #the_comment.save
-    #the_restaurant.restaurant_comments = the_restaurant.restaurant_comments + " " + the_comment.text
+    the_comment = Comment.new
+    the_comment.text = params.fetch("query_comments")
+    the_comment.user_id = @current_user.id
+    the_comment.restaurant_id = the_restaurant.id
+    the_comment.save
 
     if the_restaurant.valid?
       the_restaurant.save
@@ -68,12 +66,11 @@ class RestaurantsController < ApplicationController
     the_rating.save
     the_restaurant.rating = the_restaurant.ave_ratings
 
-    #the_comment = Comment.new
-    #the_comment.text = params.fetch("query_comments")
-    #the_comment.user_id = @current_user.id
-    #the_comment.restaurant_id = the_restaurant.id
-    #the_comment.save
-    #the_restaurant.restaurant_comments = the_restaurant.restaurant_comments + " " + the_comment.text
+    the_comment = Comment.new
+    the_comment.text = params.fetch("query_comments")
+    the_comment.user_id = @current_user.id
+    the_comment.restaurant_id = the_restaurant.id
+    the_comment.save
 
     if the_restaurant.valid?
       the_restaurant.save

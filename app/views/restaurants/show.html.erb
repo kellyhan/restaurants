@@ -32,7 +32,13 @@
               <% end %>
             </ul>
           </li>
-          <li class="list-group-item"><%= @the_restaurant.restaurant_comments %></li>
+          <li class="list-group-item"> Comments
+            <ul>
+              <% Comment.where({ :restaurant_id => @the_restaurant.id }).each do |a_comment| %>
+                <li class="list-group-item"> <%= a_comment.user.username %>: <%= a_comment.text %> </li>
+              <% end %>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
@@ -109,10 +115,10 @@
 
             <div>
               <label for="comments_box">
-                Comments
+                Add a comment
               </label>
 
-              <textarea id="comments_box" name="query_comments"><%= @the_restaurant.restaurant_comments %></textarea>
+              <textarea id="comments_box" name="query_comments"></textarea>
             </div>
 
             <button>

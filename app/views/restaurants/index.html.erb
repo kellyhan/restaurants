@@ -45,17 +45,17 @@
   };
   
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=[YOUR_API_KEY]&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8RrOFB0dPsF-leqeFJdmX3yOvcQbfNyY&callback=initMap"
 async defer></script>
 
 <p></p>
 
 <div>
   <% if @list_of_restaurants.count != 0 %>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
       <% @list_of_restaurants.each do |a_restaurant| %>
         <div class="col">
-          <div class="card h-100" style="width: 18rem;">
+          <div class="card h-100" style="width: 30rem;">
             <div class="card-header">
               <h5 class="card-title"> <%= a_restaurant.name %> </h5>
             </div>
@@ -63,8 +63,14 @@ async defer></script>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item"> <%= a_restaurant.address %> </li>
                 <li class="list-group-item"> <%= a_restaurant.cuisine.name %> </li>
-                <li class="list-group-item"> <%= a_restaurant.rating %> </li>
-                <li class="list-group-item"> <%= a_restaurant.restaurant_comments %> </li>
+                <li class="list-group-item"> Average rating: <%= a_restaurant.rating %> </li>
+                <li class="list-group-item"> Comments
+                  <ul>
+                    <% Comment.where({ :restaurant_id => a_restaurant.id }).each do |a_comment| %>
+                      <li class="list-group-item"> <%= a_comment.user.username %>: <%= a_comment.text %> </li>
+                    <% end %>
+                  </ul>
+                </li>
               </ul>
             </div>
             <div class="card-footer">

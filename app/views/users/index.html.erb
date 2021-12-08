@@ -12,7 +12,9 @@
       <small class="text-muted">Click to show @<%= a_user.username %>'s restaurants</small>
     </div>
     <p class="mb-1">@<%= a_user.username %></p>
-    <% matching_restaurants = Restaurant.all.where(:user_id => a_user.id) %>
+    <% matching_ratings = Rating.all.where(:user_id => a_user.id) %>
+    <% rests = matching_ratings.map_relation_to_array(:restaurant_id) %>
+    <% matching_restaurants = Restaurant.where({ :id => rests }).distinct %>
     <small class="text-muted"><%= matching_restaurants.count %> restaurants</small>
   </a>
 </div>

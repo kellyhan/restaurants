@@ -17,8 +17,11 @@ class UsersController < ApplicationController
   def show_restaurants
     @the_user = Users.where({ :id => params.fetch("path_id") }).at(0)
     the_id = params.fetch("path_id")
-    matching_restaurants = Restaurant.all.where(:user_id => the_id)
-    @list_of_restaurants = matching_restaurants.order({ :created_at => :desc })
+    matching_ratings = Rating.all.where(:user_id => the_id)
+    rests = matching_ratings.map_relation_to_array(:restaurant_id)
+    @matching_restaurants = Restaurant.where({ :id => rests }).distinct
+
+    @list_of_restaurants = @matching_restaurants.order({ :created_at => :desc })
 
     render({ :template => "users/show_restaurants.html.erb" })
   end

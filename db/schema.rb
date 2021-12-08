@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2021_12_07_051522) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "cuisine_id"
     t.integer "rating"
-    t.text "restaurant_comments"
+    t.integer "comment_id"
   end
 
   create_table "users", force: :cascade do |t|

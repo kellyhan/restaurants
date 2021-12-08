@@ -2,15 +2,15 @@
 #
 # Table name: restaurants
 #
-#  id                  :integer          not null, primary key
-#  address             :text
-#  name                :string
-#  rating              :integer
-#  restaurant_comments :text
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  cuisine_id          :integer
-#  user_id             :integer
+#  id         :integer          not null, primary key
+#  address    :text
+#  name       :string
+#  rating     :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  comment_id :integer
+#  cuisine_id :integer
+#  user_id    :integer
 #
 class Restaurant < ApplicationRecord
   validates :name, :presence => true

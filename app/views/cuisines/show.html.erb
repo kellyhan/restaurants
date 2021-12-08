@@ -26,7 +26,13 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item"> <%= a_restaurant.address %> </li>
                 <li class="list-group-item"> <%= a_restaurant.rating %> </li>
-                <li class="list-group-item"> <%= a_restaurant.restaurant_comments %> </li>
+                <li class="list-group-item"> Comments
+                  <ul>
+                    <% Comment.where({ :restaurant_id => a_restaurant.id }).each do |a_comment| %>
+                      <li class="list-group-item"> <%= a_comment.user.username %>: <%= a_comment.text %> </li>
+                    <% end %>
+                  </ul>
+                </li>
               </ul>
             </div>
             <div class="card-footer">
