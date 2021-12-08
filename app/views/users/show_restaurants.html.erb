@@ -1,3 +1,5 @@
+<div class="container-fluid">
+
 <h1>
   <a href="/user_details/<%= @the_user.id %>"><%= @the_user.first_name %> <%= @the_user.last_name %></a>'s Restaurants
 </h1>
@@ -54,12 +56,19 @@
       <% end %>
     </div>
   <% else %>
-    <p>
-      <form action="/insert_restaurant">
-        <button>
-          Add a restaurant
-        </button>
-      </form>
-    </p>
+    <% if @current_user == @the_user %>
+      <p>
+        <form action="/insert_restaurant">
+          <button>
+            Add a restaurant
+          </button>
+        </form>
+      </p>
+    <% else %>
+      <p></p>
+      No restaurants yet
+    <% end %>
   <% end %>
+</div>
+
 </div>

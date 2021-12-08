@@ -1,3 +1,5 @@
+<div class="container-fluid">
+
 <% if @current_user != nil %>  
 
   <div>
@@ -5,7 +7,7 @@
       Add a new dish
     </h2>
 
-    <form action="/create_dish" method="post">
+    <form action="/create_dish" method="post" class="form-horizontal" enctype="multipart/form-data">
       <div>
         <label for="name_box">
           Name
@@ -19,7 +21,9 @@
           Image
         </label>
 
-        <input type="text" id="image_box" name="query_image">
+        <div class="col-8">
+          <input type="file" id="image" name="image" class="form-control">
+        </div>
       </div>
 
       <div>
@@ -56,3 +60,5 @@
 <a href="/user_sign_in">Sign In</a>
 
 <% end %>
+
+</div>

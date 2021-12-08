@@ -11,4 +11,11 @@
 #  restaurant_id :integer
 #
 class Dish < ApplicationRecord
+
+  mount_uploader :image, ImageUploader
+
+  def restaurant
+    return Restaurant.where({ :id => self.restaurant_id }).at(0)
+  end
+
 end

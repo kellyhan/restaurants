@@ -22,14 +22,14 @@ class DishesController < ApplicationController
   end
 
   def create
-    the_dish = Dish.new
-    the_dish.name = params.fetch("query_name")
-    the_dish.image = params.fetch("query_image")
-    the_dish.restaurant_id = params.fetch("query_restaurant_id")
-    the_dish.comments = params.fetch("query_comments")
+    @the_dish = Dish.new
+    @the_dish.name = params.fetch("query_name")
+    @the_dish.image = params.fetch(:image)
+    @the_dish.restaurant_id = params.fetch("query_restaurant")
+    @the_dish.comments = params.fetch("query_comments")
 
-    if the_dish.valid?
-      the_dish.save
+    if @the_dish.valid?
+      @the_dish.save
       redirect_to("/dishes", { :notice => "Dish created successfully." })
     else
       redirect_to("/dishes", { :notice => "Dish failed to create successfully." })
@@ -38,18 +38,18 @@ class DishesController < ApplicationController
 
   def update
     the_id = params.fetch("path_id")
-    the_dish = Dish.where({ :id => the_id }).at(0)
+    @the_dish = Dish.where({ :id => the_id }).at(0)
 
-    the_dish.name = params.fetch("query_name")
-    the_dish.image = params.fetch("query_image")
-    the_dish.restaurant_id = params.fetch("query_restaurant_id")
-    the_dish.comments = params.fetch("query_comments")
+    @the_dish.name = params.fetch("query_name")
+    @the_dish.image = params.fetch(:image)
+    @the_dish.restaurant_id = params.fetch("query_restaurant")
+    @the_dish.comments = params.fetch("query_comments")
 
-    if the_dish.valid?
-      the_dish.save
-      redirect_to("/dishes/#{the_dish.id}", { :notice => "Dish updated successfully."} )
+    if @the_dish.valid?
+      @the_dish.save
+      redirect_to("/dishes", { :notice => "Dish updated successfully."} )
     else
-      redirect_to("/dishes/#{the_dish.id}", { :alert => "Dish failed to update successfully." })
+      redirect_to("/dishes/#{@the_dish.id}", { :alert => "Dish failed to update successfully." })
     end
   end
 
