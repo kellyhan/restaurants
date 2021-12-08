@@ -1,4 +1,4 @@
-class DishesController < ApplicationController
+class PicturesController < ApplicationController
   def index
     matching_dishes = Dish.all
 
@@ -31,9 +31,9 @@ class DishesController < ApplicationController
 
     if @the_dish.valid?
       @the_dish.save
-      redirect_to("/dishes", { :notice => "Dish created successfully." })
+      redirect_to("/pictures", { :notice => "Dish created successfully." })
     else
-      redirect_to("/dishes", { :notice => "Dish failed to create successfully." })
+      redirect_to("/pictures", { :notice => "Dish failed to create successfully." })
     end
   end
 
@@ -49,9 +49,9 @@ class DishesController < ApplicationController
 
     if @the_dish.valid?
       @the_dish.save
-      redirect_to("/dishes", { :notice => "Dish updated successfully."} )
+      redirect_to("/pictures", { :notice => "Dish updated successfully."} )
     else
-      redirect_to("/dishes/#{@the_dish.id}", { :alert => "Dish failed to update successfully." })
+      redirect_to("/pictures/#{@the_dish.id}", { :alert => "Dish failed to update successfully." })
     end
   end
 
@@ -61,6 +61,6 @@ class DishesController < ApplicationController
 
     the_dish.destroy
 
-    redirect_to("/dishes", { :notice => "Dish deleted successfully."} )
+    redirect_to("/pictures", { :notice => "Dish deleted successfully."} )
   end
 end

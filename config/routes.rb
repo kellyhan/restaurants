@@ -41,20 +41,20 @@ Rails.application.routes.draw do
   # Routes for the Dish resource:
 
   # CREATE
-  get("/insert_dish", { :controller => "dishes", :action => "create_dish" })
-  post("/create_dish", { :controller => "dishes", :action => "create" })     
+  get("/insert_picture", { :controller => "pictures", :action => "create_dish" })
+  post("/create_picture", { :controller => "pictures", :action => "create" })     
           
   # READ
-  get("/dishes", { :controller => "dishes", :action => "index" })
+  get("/pictures", { :controller => "pictures", :action => "index" })
   
-  get("/dishes/:path_id", { :controller => "dishes", :action => "show" })
+  get("/pictures/:path_id", { :controller => "pictures", :action => "show" })
   
   # UPDATE
   
-  post("/modify_dish/:path_id", { :controller => "dishes", :action => "update" })
+  post("/modify_picture/:path_id", { :controller => "pictures", :action => "update" })
   
   # DELETE
-  get("/delete_dish/:path_id", { :controller => "dishes", :action => "destroy" })
+  get("/delete_picture/:path_id", { :controller => "pictures", :action => "destroy" })
 
   #------------------------------
 
