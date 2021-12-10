@@ -1,10 +1,4 @@
 class CuisinesController < ApplicationController
-  def load_current_user
-    the_id = session.fetch(:user_id)
-
-    @current_user = Users.where({ :id => the_id }).at(0)
-  end
-  
   def index
     matching_cuisines = Cuisine.all
     @list_of_cuisines = matching_cuisines.order({ :created_at => :desc })
