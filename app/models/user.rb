@@ -15,10 +15,10 @@ class User < ApplicationRecord
   validates :email, :presence => true
   has_secure_password
 
-  has_many(:restaurants, { :class_name => "Restaurant", :foreign_key => "user_id", :dependent => :destroy })
-  has_many(:comments, { :class_name => "Comment", :foreign_key => "user_id", :dependent => :destroy })
-  has_many(:ratings, { :class_name => "Rating", :foreign_key => "user_id", :dependent => :destroy })
-  has_many(:dishes, { :class_name => "Dish", :foreign_key => "user_id", :dependent => :destroy })
+  has_many(:restaurants, { :class_name => "Restaurant", :foreign_key => "user_id" })
+  has_many(:comments, { :class_name => "Comment", :foreign_key => "user_id" })
+  has_many(:ratings, { :class_name => "Rating", :foreign_key => "user_id" })
+  has_many(:dishes, { :class_name => "Dish", :foreign_key => "user_id" })
 
   validates :username, :presence => true
   validates :username, :uniqueness => { :case_sensitive => false }
