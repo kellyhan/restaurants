@@ -17,7 +17,7 @@ class Restaurant < ApplicationRecord
   validates :address, :presence => true
   validates :user_id, :presence => true
 
-  belongs_to(:user, { :required => true, :class_name => "Users", :foreign_key => "user_id" })
+  belongs_to(:users, { :required => true, :class_name => "Users", :foreign_key => "user_id" })
   belongs_to(:cuisine, { :required => true, :class_name => "Cuisine", :foreign_key => "cuisine_id" })
 
   def user_restaurant_count

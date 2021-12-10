@@ -1,4 +1,10 @@
 class CommentsController < ApplicationController
+  def load_current_user
+    the_id = session.fetch(:user_id)
+
+    @current_user = Users.where({ :id => the_id }).at(0)
+  end
+  
   def index
     matching_comments = Comment.all
 

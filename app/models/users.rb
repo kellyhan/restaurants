@@ -17,6 +17,7 @@ class Users < ApplicationRecord
   has_secure_password
 
   has_many(:restaurants, { :class_name => "Restaurant", :foreign_key => "user_id", :dependent => :destroy })
+  has_many(:comments, { :class_name => "Comment", :foreign_key => "user_id", :dependent => :destroy })
 
   validates :username, :presence => true
   validates :username, :uniqueness => { :case_sensitive => false }

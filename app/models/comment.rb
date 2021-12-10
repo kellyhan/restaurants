@@ -19,4 +19,7 @@ class Comment < ApplicationRecord
     return Users.where({ :id => self.restaurant_id }).at(0)
   end
 
+  belongs_to(:users, { :required => true, :class_name => "Users", :foreign_key => "user_id" })
+  belongs_to(:restaurant, { :required => true, :class_name => "Restaurants", :foreign_key => "restaurant_id" })
+
 end

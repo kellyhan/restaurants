@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
   # skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie] 
 
+  def load_current_user
+    the_id = session.fetch(:user_id)
+
+    @current_user = Users.where({ :id => the_id }).at(0)
+  end
+
   def index
     matching_users = Users.all
     @list_of_users = matching_users.order({ :created_at => :desc })
