@@ -33,7 +33,6 @@ class RestaurantsController < ApplicationController
     the_rating.rate = params.fetch("query_rating")
     the_rating.user_id = @current_user.id
     the_rating.save
-    the_restaurant.rating = the_restaurant.ave_ratings
 
     if params.fetch("query_comments") != ""
       the_comment = Comment.new
@@ -47,6 +46,8 @@ class RestaurantsController < ApplicationController
       the_restaurant.save
       the_rating.restaurant_id = the_restaurant.id
       the_rating.save
+      the_restaurant.rating = the_restaurant.ave_ratings
+      the_restaurant.save
       redirect_to("/restaurants", { :notice => "Restaurant created successfully." })
     else
       redirect_to("/restaurants", { :alert => the_restaurant.errors.full_messages.to_sentence })

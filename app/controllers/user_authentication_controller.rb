@@ -1,27 +1,22 @@
-class UsersController < ApplicationController
-  # skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie] 
-
-  def load_current_user
-    the_id = session.fetch(:user_id)
-
-    @current_user = Users.where({ :id => the_id }).at(0)
-  end
+class UserAuthenticationController < ApplicationController
+  # Uncomment this if you want to force users to sign in before any other actions
+  # skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie] })
 
   def index
-    matching_users = Users.all
+    matching_users = User.all
     @list_of_users = matching_users.order({ :created_at => :desc })
 
-    render({ :template => "users/index.html.erb" })
+    render({ :template => "user_authentication/index.html.erb" })
   end
 
   def show
-    @the_user = Users.where({ :id => params.fetch("path_id") }).at(0)
+    @the_user = User.where({ :id => params.fetch("path_id") }).at(0)
 
-    render({ :template => "users/show.html.erb" })
+    render({ :template => "user_authentication/show.html.erb" })
   end
   
   def show_restaurants
-    @the_user = Users.where({ :id => params.fetch("path_id") }).at(0)
+    @the_user = User.where({ :id => params.fetch("path_id") }).at(0)
     the_id = params.fetch("path_id")
     matching_ratings = Rating.all.where(:user_id => the_id)
     rests = matching_ratings.map_relation_to_array(:restaurant_id)
@@ -29,15 +24,15 @@ class UsersController < ApplicationController
 
     @list_of_restaurants = @matching_restaurants.order({ :created_at => :desc })
 
-    render({ :template => "users/show_restaurants.html.erb" })
+    render({ :template => "user_authentication/show_restaurants.html.erb" })
   end
 
   def sign_in_form
-    render({ :template => "users/sign_in.html.erb" })
+    render({ :template => "user_authentication/sign_in.html.erb" })
   end
 
   def create_cookie
-    user = Users.where({ :email => params.fetch("query_email") }).first
+    user = User.where({ :email => params.fetch("query_email") }).first
     
     the_supplied_password = params.fetch("query_password")
     
@@ -59,15 +54,15 @@ class UsersController < ApplicationController
   def destroy_cookies
     reset_session
 
-    redirect_to("/user_sign_in", { :notice => "Signed out successfully." })
+    redirect_to("/", { :notice => "Signed out successfully." })
   end
 
   def sign_up_form
-    render({ :template => "users/sign_up.html.erb" })
+    render({ :template => "user_authentication/sign_up.html.erb" })
   end
 
   def create
-    @user = Users.new
+    @user = User.new
     @user.email = params.fetch("query_email")
     @user.password = params.fetch("query_password")
     @user.password_confirmation = params.fetch("query_password_confirmation")
@@ -82,28 +77,29 @@ class UsersController < ApplicationController
    
       redirect_to("/", { :notice => "User account created successfully."})
     else
-      redirect_to("/user_sign_up", { :alert => @user.errors.full_messages.to_sentence })
+      redirect_to("/user_sign_up", { :alert => "User account failed to create successfully."})
     end
   end
     
   def edit_profile_form
-    render({ :template => "users/edit_profile.html.erb" })
+    render({ :template => "user_authentication/edit_profile.html.erb" })
   end
 
   def update
-    @the_user = @current_user
-    @the_user.password = params.fetch("query_password")
-    @the_user.password_confirmation = params.fetch("query_password_confirmation")
-    @the_user.first_name = params.fetch("query_first_name")
-    @the_user.last_name = params.fetch("query_last_name")
-    @the_user.username = params.fetch("query_username")
+    @user = @current_user
+    @user.email = params.fetch("query_email")
+    @user.password = params.fetch("query_password")
+    @user.password_confirmation = params.fetch("query_password_confirmation")
+    @user.first_name = params.fetch("query_first_name")
+    @user.last_name = params.fetch("query_last_name")
+    @user.username = params.fetch("query_username")
     
-    if @the_user.valid?
-      @the_user.save
+    if @user.valid?
+      @user.save
 
-      redirect_to("/users", { :notice => "User account updated successfully."})
+      redirect_to("/", { :notice => "User account updated successfully."})
     else
-      render({ :template => "users/edit_profile_with_errors.html.erb" , :alert => @the_user.errors.full_messages.to_sentence })
+      render({ :template => "user_authentication/edit_profile_with_errors.html.erb" })
     end
   end
 
@@ -111,7 +107,7 @@ class UsersController < ApplicationController
     @current_user.destroy
     reset_session
     
-    redirect_to("/", { :notice => "User account deleted." })
+    redirect_to("/", { :notice => "User account cancelled" })
   end
  
 end

@@ -4,6 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  address    :text
+#  comments   :text
 #  name       :string
 #  rating     :integer
 #  created_at :datetime         not null
@@ -17,15 +18,15 @@ class Restaurant < ApplicationRecord
   validates :address, :presence => true
   validates :user_id, :presence => true
 
-  belongs_to(:users, { :required => true, :class_name => "Users", :foreign_key => "user_id" })
+  belongs_to(:user, { :required => true, :class_name => "User", :foreign_key => "user_id" })
   belongs_to(:cuisine, { :required => true, :class_name => "Cuisine", :foreign_key => "cuisine_id" })
 
   def user_restaurant_count
-    return Users.where({ :id => self.user_id }).count
+    return User.where({ :id => self.user_id }).count
   end
 
   def restaurant_user
-    return Users.where({ :id => self.user_id }).at(0)
+    return User.where({ :id => self.user_id }).at(0)
   end
 
   def cuisine
