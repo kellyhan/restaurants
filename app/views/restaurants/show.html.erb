@@ -48,6 +48,16 @@
 
     <p></p>
 
+    <div class="row">
+      <form action="/insert_picture">
+        <button>
+          Add an image
+        </button>
+      </form>
+    </div>
+
+    <p></p>
+
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <% Dish.where({ :restaurant_id => @the_restaurant.id }).each do |a_dish| %>
         <div class="col">
@@ -71,34 +81,18 @@
         </div>
       <% end %>
     </div>
-
-    <p></p>
-
-    <div class="row">
-      <form action="/insert_picture">
-        <button>
-          Add an image
-        </button>
-      </form>
-    </div>
     </div>
 
     <div class="col-lg-4">
       <% if @current_user != nil %>
         <div>
-          <h2>
+          <h3>
             Edit restaurant
-          </h2>
+          </h3>
 
           <div>
             <a href="/delete_restaurant/<%= @the_restaurant.id %>">
               Delete restaurant
-            </a>
-          </div>
-
-          <div>
-            <a href="/insert_picture/">
-              Add images
             </a>
           </div>
 
@@ -136,7 +130,21 @@
               (If the cuisine is not listed, <a href="/insert_cuisine">create a new cuisine</a>)
             </div>
 
-            <div>
+            <p>
+            <button>
+              Update restaurant
+            </button>
+            </p>
+        </div>
+
+        <p></p>
+
+        <div>
+          <h4>
+            Add/change rating or comment
+          </h4>
+
+          <div>
               <label for="rating_box">
                 Rating
               </label>
@@ -162,7 +170,7 @@
             </div>
 
             <button>
-              Update restaurant
+              Post
             </button>
           </form>
         </div>

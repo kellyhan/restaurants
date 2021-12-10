@@ -9,29 +9,27 @@
 
     <form action="/create_picture" method="post" class="form-horizontal" enctype="multipart/form-data">
       <div>
-        <label for="name_box">
+        <label for="name_box" class="form-label">
           Name
         </label>
 
-        <input type="text" id="name_box" name="query_name">
+        <input type="text" id="name_box" name="query_name" class="form-control">
       </div>
 
       <div>
-        <label for="image_box">
+        <label for="image_box" class="form-label">
           Image
         </label>
 
-        <div class="col-8">
-          <input type="file" id="image" name="image" class="form-control">
-        </div>
+          <input type="file" id="image" name="image" class="form-control" class="form-control">
       </div>
 
       <div>
-        <label for="restaurant_id_box">
+        <label for="restaurant_id_box" class="form-label">
           Restaurant
         </label>
 
-        <select name="query_restaurant">
+        <select name="query_restaurant" class="form-select">
           <% Restaurant.all.each do |a_restaurant| %>
             <option value="<%= a_restaurant.id %>"><%= a_restaurant.name %></option>
           <% end %>
@@ -39,12 +37,14 @@
       </div>
 
       <div>
-        <label for="comments_box">
+        <label for="comments_box" class="form-label">
           Comments
         </label>
 
-        <textarea id="comments_box" name="query_comments" rows="3"></textarea>
+        <textarea id="comments_box" name="query_comments" class="form-control"></textarea>
       </div>
+
+      <p></p>
 
       <button>
         Create image

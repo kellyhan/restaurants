@@ -26,7 +26,6 @@ class PicturesController < ApplicationController
     @the_dish.name = params.fetch("query_name")
     @the_dish.image = params.fetch(:image)
     @the_dish.restaurant_id = params.fetch("query_restaurant")
-    @the_dish.comments = params.fetch("query_comments")
     @the_dish.user_id = @current_user.id
 
     if @the_dish.valid?
@@ -42,9 +41,8 @@ class PicturesController < ApplicationController
     @the_dish = Dish.where({ :id => the_id }).at(0)
 
     @the_dish.name = params.fetch("query_name")
-    @the_dish.image = params.fetch(:image)
+    @the_dish.image = @the_dish.image
     @the_dish.restaurant_id = params.fetch("query_restaurant")
-    @the_dish.comments = params.fetch("query_comments")
     @the_dish.user_id = @current_user.id
 
     if @the_dish.valid?

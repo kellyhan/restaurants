@@ -8,56 +8,37 @@
     </h2>
 
     <form action="/create_restaurant" method="post">
-      <div>
-        <label for="name_box">
-          Name
-        </label>
-
-        <input type="text" id="name_box" name="query_name">
+      <div class="row g-3">
+      <div class="col-md-6">
+        <label for="name_box" class="form-label">Name</label>
+        <input type="text" id="name_box" name="query_name" class="form-control">
       </div>
-
-      <div>
-        <label for="address_box">
-          Address
-        </label>
-
-        <textarea id="address_box" name="query_address" rows="2"></textarea>
-      </div>
-
-      <div>
-        <label for="cuisine_box">
-          Cuisine
-        </label>
-
-        <select name="query_cuisine">
+      <div class="col-md-6">
+        <label for="cuisine_box" class="form-label">Cuisine</label>
+        <select name="query_cuisine" class="form-select">
           <% Cuisine.all.each do |a_cuisine| %>
             <option value="<%= a_cuisine.id %>"><%= a_cuisine.name %></option>
           <% end %>
         </select>
         (If the cuisine is not listed, <a href="/insert_cuisine">create a new cuisine</a>)
       </div>
-
-      <div>
-        <label for="rating_box">
-          Rating
-        </label>
-
-        <select id="rating_box" name="query_rating">
+      <div class="col-12">
+        <label for="address_box" class="form-label">Address</label>
+        <textarea id="address_box" name="query_address" class="form-control"></textarea>
+      </div>
+      <div class="col-md-2">
+        <label for="rating_box" class="form-label">Rating</label>
+        <select id="rating_box" name="query_rating" class="form-select">
           <% array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] %>
           <% array.each do |a_number| %>
             <option value="<%= a_number %>"><%= a_number %></option>
           <% end %>
         </select>
       </div>
-
-      <div>
-        <label for="comments_box">
-          Add a comment
-        </label>
-
-        <textarea id="comments_box" name="query_comments" rows="3"></textarea>
+      <div class="col-md-10">
+        <label for="comments_box" class="form-label">Add a comment (optional)</label>
+        <textarea id="comments_box" name="query_comments" class="form-control"></textarea>
       </div>
-
       </div>
 
       <button>

@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
 <h1>
-  <a href="/user_details/<%= @the_user.id %>"><%= @the_user.first_name %> <%= @the_user.last_name %></a>'s Restaurants
+  <%= @the_user.first_name %> <%= @the_user.last_name %>'s Restaurants
 </h1>
 
 <div>
@@ -22,20 +22,22 @@
             <div class="card-body">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item"> <%= a_restaurant.address %> </li>
-                <li class="list-group-item"> User's rating:
+                <li class="list-group-item"> <%= @the_user.username %>'s rating:
                   <% a_restaurant.list_of_ratings.each do |a_rating| %>
                     <% if a_rating.user.id == @the_user.id %>
                       <%= a_restaurant.rating %>
                     <% end %>
                   <% end %>
                 </li>
-                <li class="list-group-item"> Comments
-                  <ul>
-                    <% Comment.where({ :restaurant_id => a_restaurant.id }).each do |a_comment| %>
-                      <li class="list-group-item"> <%= a_comment.user.username %>: <%= a_comment.text %> </li>
-                    <% end %>
-                  </ul>
-                </li>
+                <% if Comment.where({ :restaurant_id => a_restaurant.id }).count != 0 && Comment.where({ :user_id => @the_user.id }).count != 0 %>
+                  <li class="list-group-item"> Comments
+                    <ul>
+                      <% Comment.where({ :restaurant_id => a_restaurant.id }).each do |a_comment| %>
+                        <li class="list-group-item"> <%= a_comment.user.username %>: <%= a_comment.text %> </li>
+                      <% end %>
+                    </ul>
+                  </li>
+                <% end %>
               </ul>
             </div>
             <div class="card-footer">

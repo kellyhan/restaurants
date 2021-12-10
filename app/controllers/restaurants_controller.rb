@@ -63,7 +63,7 @@ class RestaurantsController < ApplicationController
     the_restaurant.user_id = @current_user.id
 
     the_rating = Rating.where({ :user_id => @current_user.id, :restaurant_id => the_restaurant.id }).at(0)
-    if the_rating.user_id == @current_user.id && the_rating.restaurant_id == the_restaurant.id
+    if the_rating != nil
       the_rating.rate = params.fetch("query_rating")
       the_rating.save
     else
