@@ -4,6 +4,17 @@
   All cuisines
 </h1>
 
+<div class="col-lg-7">
+  (If cuisine is not listed in the dropdown menu below, <a href="/insert_cuisine">create a new cuisine</a>)
+  <select name="cuisine" class="form-select">
+    <% Cuisine.all.each do |a_cuisine| %>
+      <option value="<%= a_cuisine.id %>"><%= a_cuisine.name %></option>
+    <% end %>
+  </select>
+</div>
+
+<p></p>
+
 <% @list_of_cuisines.each do |a_cuisine| %>
 <% matching_restaurants = Restaurant.all.where(:cuisine_id => a_cuisine.id) %>
 <% if matching_restaurants.count != 0 %>
