@@ -82,9 +82,10 @@
       <% end %>
     </div>
     </div>
-
+  
     <div class="col-lg-4">
       <% if @current_user != nil %>
+      <form action="/modify_restaurant/<%= @the_restaurant.id %>"  method="post" >
         <div>
           <h3>
             Edit restaurant
@@ -96,7 +97,6 @@
             </a>
           </div>
 
-          <form action="/modify_restaurant/<%= @the_restaurant.id %>"  method="post" >
             <div>
               <label for="name_box">
                 Name
@@ -172,8 +172,8 @@
             <button>
               Post
             </button>
-          </form>
         </div>
+      </form>
       <% end %>
     </div>
   </div>
