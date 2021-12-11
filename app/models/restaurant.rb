@@ -4,7 +4,6 @@
 #
 #  id         :integer          not null, primary key
 #  address    :text
-#  comments   :text
 #  name       :string
 #  rating     :integer
 #  created_at :datetime         not null

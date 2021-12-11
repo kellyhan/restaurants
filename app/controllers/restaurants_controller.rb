@@ -4,6 +4,10 @@ class RestaurantsController < ApplicationController
 
     @list_of_restaurants = matching_restaurants.order({ :created_at => :desc })
 
+    @list_of_restaurants.each do |a_restaurant|
+      a_restaurant.rating = a_restaurant.ave_ratings
+    end
+
     render({ :template => "restaurants/index.html.erb" })
   end
 
@@ -13,6 +17,7 @@ class RestaurantsController < ApplicationController
     matching_restaurants = Restaurant.where({ :id => the_id })
 
     @the_restaurant = matching_restaurants.at(0)
+    @the_restaurant.rating = @the_restaurant.ave_ratings
 
     render({ :template => "restaurants/show.html.erb" })
   end
