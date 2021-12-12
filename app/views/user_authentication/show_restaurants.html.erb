@@ -23,11 +23,7 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item"> <%= a_restaurant.address %> </li>
                 <li class="list-group-item"> <%= @the_user.username %>'s rating:
-                  <% a_restaurant.list_of_ratings.each do |a_rating| %>
-                    <% if a_rating.user.id == @the_user.id %>
-                      <%= a_restaurant.rating %>
-                    <% end %>
-                  <% end %>
+                  <%= Rating.where({ :user_id => @the_user.id, :restaurant_id => a_restaurant.id }).at(0).rate %>
                 </li>
                 <% if Comment.where({ :restaurant_id => a_restaurant.id }).count != 0 && Comment.where({ :user_id => @the_user.id }).count != 0 %>
                   <li class="list-group-item"> Comments
