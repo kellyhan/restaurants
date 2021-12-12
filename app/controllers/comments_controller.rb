@@ -19,15 +19,16 @@ class CommentsController < ApplicationController
 
   def create
     the_comment = Comment.new
-    the_comment.text = params.fetch("query_text")
-    the_comment.user_id = params.fetch("query_user_id")
-    the_comment.restaurant_id = params.fetch("query_restaurant_id")
+    the_comment.text = params.fetch("query_comments")
+    the_comment.user_id = @current_user.id
+    the_restaurant_id = params.fetch("query_restaurant_id")
+    the_comment.restaurant_id = the_restaurant_id
 
     if the_comment.valid?
       the_comment.save
-      redirect_to("/comments", { :notice => "Comment created successfully." })
+      redirect_to("/restaurants/#{the_restaurant_id}", { :notice => "Comment created successfully." })
     else
-      redirect_to("/comments", { :notice => "Comment failed to create successfully." })
+      redirect_to("/restaurants/#{the_restaurant_id}", { :notice => "Comment failed to create successfully." })
     end
   end
 

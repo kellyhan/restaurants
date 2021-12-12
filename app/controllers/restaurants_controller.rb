@@ -68,26 +68,18 @@ class RestaurantsController < ApplicationController
     the_restaurant.cuisine_id = params.fetch("query_cuisine")
     the_restaurant.user_id = @current_user.id
 
-    the_rating = Rating.where({ :user_id => @current_user.id, :restaurant_id => the_restaurant.id }).at(0)
-    if the_rating != nil
-      the_rating.rate = params.fetch("query_rating")
-      the_rating.save
+    @the_rating = Rating.where({ :user_id => @current_user.id, :restaurant_id => the_restaurant.id }).at(0)
+    if @the_rating != nil
+      @the_rating.rate = params.fetch("query_rating")
+      @the_rating.save
     else
-      the_rating = Rating.new
-      the_rating.rate = params.fetch("query_rating")
-      the_rating.user_id = @current_user.id
-      the_rating.restaurant_id = the_restaurant.id
-      the_rating.save
+      @the_rating = Rating.new
+      @the_rating.rate = params.fetch("query_rating")
+      @the_rating.user_id = @current_user.id
+      @the_rating.restaurant_id = the_restaurant.id
+      @the_rating.save
     end
     the_restaurant.rating = the_restaurant.ave_ratings
-
-    if params.fetch("query_comments") != ""
-      the_comment = Comment.new
-      the_comment.text = params.fetch("query_comments")
-      the_comment.user_id = @current_user.id
-      the_comment.restaurant_id = the_restaurant.id
-      the_comment.save
-    end
 
     if the_restaurant.valid?
       the_restaurant.save
